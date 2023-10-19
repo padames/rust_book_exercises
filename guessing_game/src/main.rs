@@ -20,8 +20,9 @@ fn main() {
 
         // let guess: u32 = guess.trim().parse().expect("Please type a number");
         let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
+            Ok(num) => { if num > 100 {println!("'{num}' is too big. The secret \
+            number is between 0 and 100"); continue} else {num} },
+            Err(e) => {println!("{e}"); continue},
         };
 
         println!("You guessed: {guess}");
