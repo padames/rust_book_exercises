@@ -9,6 +9,8 @@ fn main() {
 
     // println!("The secret number is {secret_number}");
 
+    let mut counter: u8 = 0;
+
     loop {
         println!("Please input your guess.");
 
@@ -25,13 +27,16 @@ fn main() {
                 if num > 100 {
                     println!("'{num}' is too big. The secret \
                     number is between 0 and 100"); 
-                    continue } 
-                else 
+                    continue 
+                } else 
                     { num }
             },
             Err(e)  => 
             { 
-                println!("{e}"); 
+                println!("It must be a positive integer... \
+                I saw {guess}\
+                {e}, \
+                try again or press Ctr+C to exit."); 
                 continue
             },
         };
@@ -41,9 +46,10 @@ fn main() {
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small"),
             Ordering::Equal => {
-                println!("You win!");
+                println!("You win in {} tries!", counter+1);
                 break; },
             Ordering::Greater => println!("Too big"),
         }
+        counter += 1;
     }
 }
