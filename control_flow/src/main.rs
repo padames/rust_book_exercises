@@ -17,7 +17,7 @@ fn main() {
     'outer_loop: loop {
         println!("Outer loop counter: {cnt}");
         let mut barrier_value = 10;
-        let reset_val = loop {
+        let _reset_val = loop {
             println!("barrier value {barrier_value}");
             if barrier_value < 8 {
                 break cnt;
