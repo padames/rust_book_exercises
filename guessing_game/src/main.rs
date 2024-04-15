@@ -2,12 +2,47 @@ use std::{io, cmp::Ordering};
 
 use rand::Rng;
 
+const NUM_GUESS_MAX: u32 = 100;
+
+fn is_in_range(num: &u32) -> bool {
+    if num > &NUM_GUESS_MAX {
+        println!("'{num}' is too big. The secret \
+        number is between 0 and {NUM_GUESS_MAX}");
+        false
+    } else {
+        true
+    }
+}
+
+/*
+fn is_a_valid_guess(guess_input: &String, mut guess_num: u32) -> bool {
+    let guess_num :u32 = match guess_input.trim().parse() {
+        Ok(num) => {
+            if is_in_range(num) {
+                num
+            } else {
+                return false
+            }
+        }, Err(e) => {
+            println!("It must be a positive integer... \
+            I saw {guess_num} \
+            {e}, \
+            try again or press Ctr+C to exit."); 
+            return false  
+        }
+    };
+    guess_num = guess_num;
+    true
+}
+
 fn main() {
     println!("Guess the number!");
     
     let secret_number: u32 = rand::thread_rng().gen_range(1..=100);
 
     // println!("The secret number is {secret_number}");
+
+    let mut counter: u8 = 0;
 
     loop {
         println!("Please input your guess.");
@@ -18,10 +53,63 @@ fn main() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
-        // let guess: u32 = guess.trim().parse().expect("Please type a number");
+        // the new guess: u32 shadows the previous guess: String
+        let guess_num: u32;
+        if ! is_a_valid_guess(&guess, guess_num) {
+            continue
+        }
+
+        let guess: u32 = guess_num;
+
+        println!("You guessed: {guess}");
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small"),
+            Ordering::Equal => {
+                println!("You win in {} tries!", counter+1);
+                break; },
+            Ordering::Greater => println!("Too big"),
+        }
+        counter += 1;
+    }
+}
+*/
+
+fn main() {
+    println!("Guess the number!");
+    
+    let secret_number: u32 = rand::thread_rng().gen_range(1..=100);
+
+    // println!("The secret number is {secret_number}");
+
+    let mut counter: u8 = 0;
+
+    loop {
+        println!("Please input your guess.");
+
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
+
+        // the new guess: u32 shadows the previous guess: String
         let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
+            Ok(num) => 
+            { 
+                if is_in_range(&num) 
+                    { num } 
+                else 
+                    { continue }
+            },
+            Err(e)  => 
+            { 
+                println!("It must be a positive integer... \
+                I saw {guess} \
+                {e}, \
+                try again or press Ctr+C to exit."); 
+                continue
+            },
         };
 
         println!("You guessed: {guess}");
@@ -29,9 +117,10 @@ fn main() {
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small"),
             Ordering::Equal => {
-                println!("You win!");
+                println!("You win in {} tries!", counter+1);
                 break; },
             Ordering::Greater => println!("Too big"),
         }
+        counter += 1;
     }
 }
