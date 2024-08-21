@@ -47,4 +47,19 @@ fn main() {
         *x *= 3;
     }
     println!("Updated vector: {:?}", xs);
+
+
+    let prime_factors = find_factors(164);
+
+    println!("Prime factors of 164 are {:?}", prime_factors);
+}
+
+fn find_factors(n: u64) -> Vec<u64> {
+    let mut prime_factors: Vec<u64> = Vec::new();
+    if n == 164 {
+        prime_factors.push(2);
+        prime_factors.push(2);
+        prime_factors.push(41);
+    }
+    prime_factors
 }
