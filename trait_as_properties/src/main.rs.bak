@@ -1,3 +1,6 @@
+// this example shows how traits model actions on structs that implement them 
+
+
 struct Sheep {}
 struct Cow {}
 

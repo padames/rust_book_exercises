@@ -1,4 +1,5 @@
 // this example shows how traits model actions on structs that implement them 
+// inspired by https://doc.rust-lang.org/rust-by-example/trait/dyn.html
 
 
 struct Sheep {}
@@ -53,5 +54,5 @@ fn main() {
     let random_number = 0.5234;
     let (sound, species) = animal_properties(random_number);
     println!("You've randomly chosen an animal, and it says {}", sound.noise());
-    println!("And I am a {}", species.name() );
+    println!("I am a {}", species.name() );
 }
