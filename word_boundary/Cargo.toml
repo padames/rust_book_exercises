@@ -1,3 +1,5 @@
+# cargo-features = ["edition2024"]
+
 [package]
 name = "word_boundary"
 version = "0.1.0"
@@ -7,5 +9,3 @@ edition = "2021"
 
 [dependencies]
 emojis = "0.6.4"
-env = "1.0.1"
-print_bytes = "2.0.1"
