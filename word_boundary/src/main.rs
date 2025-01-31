@@ -7,9 +7,9 @@ fn main() {
     assert_eq!(fruit, ["🍇", "🍈", "🍉", "🍊", "🍋"]);
     
     let test_string = String::from(fruit[0]);
-    let long_fruity_string = "Hello".to_owned() + &test_string + ", " + fruit[1]; 
+    let long_fruity_string = "Hello ".to_owned() + &test_string + ", " + fruit[1] + "!"; 
     
-    println!("{}!", long_fruity_string);
+    println!("\"{}\"", long_fruity_string);
 
     for letter in long_fruity_string.chars() {
         println!("{letter}");
